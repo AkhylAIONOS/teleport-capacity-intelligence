@@ -1,0 +1,27 @@
+# macOS
+.DS_Store
+
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# Python
+backend/.venv/
+venv/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.coverage
+
+# Node
+frontend/node_modules/
+frontend/dist/
+node_modules/
+
+# Logs
+*.log
+
+# Local/reference documents - not needed for deployment
+Teleport_Capacity_Backtest_Brief.pdf

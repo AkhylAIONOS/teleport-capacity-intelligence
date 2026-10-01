@@ -1,0 +1,38 @@
+{
+  "shipments": {
+    "shipment_id": "shipment_id",
+    "shipment_date": "shipment_date",
+    "origin": "origin",
+    "destination": "destination",
+    "weight_kg": "weight_kg",
+    "volume_cbm": "volume_cbm",
+    "actual_carrier": "actual_carrier",
+    "actual_rate_type": "actual_rate_type",
+    "actual_departure_date": "actual_departure_date",
+    "actual_base_cost": "actual_base_cost",
+    "actual_fuel_surcharge": "actual_fuel_surcharge",
+    "actual_other_cost": "actual_other_cost",
+    "actual_paid": "actual_paid"
+  },
+  "carrier_options": {
+    "option_id": "option_id",
+    "shipment_id": "shipment_id",
+    "carrier": "carrier",
+    "mode": "mode",
+    "departure_date": "departure_date",
+    "rate_type": "rate_type",
+    "capacity_available_kg": "capacity_available_kg",
+    "required_capacity_kg": "required_capacity_kg",
+    "base_cost": "base_cost",
+    "fuel_surcharge": "fuel_surcharge",
+    "other_cost": "other_cost",
+    "total_landed_cost": "total_landed_cost",
+    "available": "available",
+    "sla_feasible": "sla_feasible"
+  },
+  "fuel_index": {
+    "date": "date",
+    "fuel_index": "fuel_index",
+    "fuel_price_usd": "fuel_price_usd"
+  }
+}
