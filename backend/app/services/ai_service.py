@@ -172,8 +172,10 @@ class AIService:
         )
 
     def chat(self, request):
-        from app.services.provenance import provenance_answer
-        grounded = provenance_answer(request.message)
+        from app.services.provenance import provenance_answer, provenance_kind
+        kind = provenance_kind(request.message)
+        summary = self.analytics.get_overall_summary(request.filters) if kind == "saving" else None
+        grounded = provenance_answer(request.message, summary=summary, filters=request.filters)
         if grounded:
             answer, provenance = grounded
             return AIResponse(answer=answer, intent="DATA_PROVENANCE", provider="deterministic",

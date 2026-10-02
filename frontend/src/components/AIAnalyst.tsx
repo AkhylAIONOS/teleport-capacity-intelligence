@@ -18,6 +18,7 @@ import {
 } from "../services/api";
 import {
   metricLabel,
+  plainAnalystText,
   normalizeAnalystResponse,
   type AnalystResult,
 } from "../services/analystResponse";
@@ -236,7 +237,7 @@ export function AIAnalyst({
               {m.result?.intent === "DATA_PROVENANCE" ? (
                 <ProvenanceAnswer text={m.text} />
               ) : (
-                m.text
+                plainAnalystText(m.text)
               )}
             </p>
             {m.result && (

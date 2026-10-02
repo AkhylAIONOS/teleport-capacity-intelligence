@@ -49,6 +49,35 @@ export function safeFilters(value: unknown): Filters {
     out.shipment_ids = value.shipment_ids;
   return out as Filters;
 }
+// Decode entity tokens as text only; never insert response markup into the page.
+export function plainAnalystText(value: string): string {
+  const decoder = document.createElement("textarea");
+  let text = value;
+  for (let pass = 0; pass < 6; pass++) {
+    const decoded = text.replace(
+      /&(?:#x[0-9a-f]+|#\d+|[a-z][a-z0-9]+);/gi,
+      (entity) => {
+        decoder.innerHTML = entity;
+        return decoder.value;
+      },
+    );
+    if (decoded === text) break;
+    text = decoded;
+  }
+  return text;
+}
+
+function normalizeRecord(row: Record<string, unknown>): Row {
+  return Object.fromEntries(
+    Object.entries(row)
+      .filter(([, value]) => primitive(value))
+      .map(([key, value]) => [
+        canonicalMetricKey(key),
+        typeof value === "string" ? plainAnalystText(value) : value,
+      ]),
+  ) as Row;
+}
+
 export function normalizeAnalystResponse(value: unknown): AnalystResult {
   if (
     !object(value) ||
@@ -57,20 +86,16 @@ export function normalizeAnalystResponse(value: unknown): AnalystResult {
   )
     throw new Error("Empty or invalid analyst response");
   const table = Array.isArray(value.table)
-    ? value.table
-        .filter(object)
-        .map(
-          (r) =>
-            Object.fromEntries(
-              Object.entries(r).filter(([, v]) => primitive(v)),
-            ) as Row,
-        )
+    ? value.table.filter(object).map(normalizeRecord)
     : [];
   const metrics = object(value.metrics)
     ? Object.fromEntries(
         Object.entries(value.metrics)
           .filter(([, v]) => primitive(v))
-          .map(([k, v]) => [canonicalMetricKey(k), v]),
+          .map(([k, v]) => [
+            canonicalMetricKey(k),
+            typeof v === "string" ? plainAnalystText(v) : v,
+          ]),
       )
     : {};
   const scope = value.data_scope;
@@ -91,18 +116,11 @@ export function normalizeAnalystResponse(value: unknown): AnalystResult {
     Array.isArray(value.chart.rows)
       ? {
           type: "trend",
-          rows: value.chart.rows
-            .filter(object)
-            .map(
-              (r) =>
-                Object.fromEntries(
-                  Object.entries(r).filter(([, v]) => primitive(v)),
-                ) as Row,
-            ),
+          rows: value.chart.rows.filter(object).map(normalizeRecord),
         }
       : null;
   return {
-    answer: value.answer,
+    answer: plainAnalystText(value.answer),
     intent:
       typeof value.intent === "string" &&
       !(value.intent === "FILTER_COMMAND" && !object(value.filters))
@@ -122,21 +140,12 @@ export function normalizeAnalystResponse(value: unknown): AnalystResult {
 
 // Only canonical identifiers become labels; response strings never become HTML.
 export function metricLabel(key: string): string {
-  if (!/^[a-z][a-z0-9_]*$/.test(key)) return "Metric";
-  const label = key.replaceAll("_", " ");
+  const canonical = canonicalMetricKey(key);
+  if (!/^[a-z][a-z0-9_]*$/.test(canonical)) return "Metric";
+  const label = canonical.replaceAll("_", " ");
   return label[0].toUpperCase() + label.slice(1);
 }
 
 function canonicalMetricKey(key: string): string {
-  // Decode numeric ASCII identifier characters only, never markup or arbitrary HTML.
-  return key
-    .replace(/&amp;(?=#)/g, "&")
-    .replace(/&#(?:x([0-9a-f]+)|(\d+));/gi, (entity, hex, decimal) => {
-      const code = parseInt(hex || decimal, hex ? 16 : 10);
-      if (code > 127) return entity;
-      const character = String.fromCharCode(
-        parseInt(hex || decimal, hex ? 16 : 10),
-      );
-      return /^[a-z0-9_]$/i.test(character) ? character : entity;
-    });
+  return plainAnalystText(key);
 }

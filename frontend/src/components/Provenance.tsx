@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Info } from "lucide-react";
 import { Panel } from "./Drawer";
 import { api } from "../services/api";
+import { plainAnalystText } from "../services/analystResponse";
 
 type Field = {
   classification: string;
@@ -199,32 +200,35 @@ export function SourcesDrawer({
 export function ProvenanceAnswer({ text }: { text: string }) {
   return (
     <>
-      {text.split(/(https:\/\/[^\s;]+)/g).map((part, index) => {
-        if (!part.startsWith("https://")) return part;
-        const url = part.replace(/[.,]+$/, "");
-        try {
-          const host = new URL(url).hostname;
-          if (
-            ![
-              "www.teleport.it",
-              "help.teleport.it",
-              "www.iata.org",
-              "ourairports.com",
-            ].includes(host)
-          )
+      {plainAnalystText(text)
+        .split(/(https:\/\/[^\s;]+|\n)/g)
+        .map((part, index) => {
+          if (part === "\n") return <br key={index} />;
+          if (!part.startsWith("https://")) return part;
+          const url = part.replace(/[.,]+$/, "");
+          try {
+            const host = new URL(url).hostname;
+            if (
+              ![
+                "www.teleport.it",
+                "help.teleport.it",
+                "www.iata.org",
+                "ourairports.com",
+              ].includes(host)
+            )
+              return part;
+            return (
+              <span key={index}>
+                <a href={url} target="_blank" rel="noreferrer">
+                  {url}
+                </a>
+                {part.slice(url.length)}
+              </span>
+            );
+          } catch {
             return part;
-          return (
-            <span key={index}>
-              <a href={url} target="_blank" rel="noreferrer">
-                {url}
-              </a>
-              {part.slice(url.length)}
-            </span>
-          );
-        } catch {
-          return part;
-        }
-      })}
+          }
+        })}
     </>
   );
 }
