@@ -1,0 +1,120 @@
+{
+  "dataset_name": "PUBLIC-SOURCE-CALIBRATED SYNTHETIC DATA",
+  "dataset_version": "2.0",
+  "generated_at": "2026-10-02T04:59:00.945969+00:00",
+  "random_seed": 20261002,
+  "demo_period": {
+    "start": "2026-01-01",
+    "end": "2026-06-30"
+  },
+  "shipment_count": 2000,
+  "candidate_option_count": 13147,
+  "source_ids": [
+    "teleport_1h_2026",
+    "teleport_network_2026",
+    "teleport_routes_2022",
+    "teleport_fsc_reference",
+    "iata_fuel_2026",
+    "ourairports"
+  ],
+  "generator_version": "2.0",
+  "summary": {
+    "actual_spend": 13975691.58,
+    "optimized_spend": 13039581.61,
+    "potential_saving": 936109.97,
+    "saving_percent": 6.698129853835827
+  },
+  "note": "These values are derived from public-source-calibrated synthetic records and are not actual Teleport historical financial results.",
+  "calibration": {
+    "fuel_coefficient": 0.006,
+    "lane_factors": {
+      "South Asia": 1.18,
+      "SYD/ICN/HND": 1.35,
+      "other": 1.0
+    },
+    "discount_distribution": "25% zero; 40% 2.5\u20138%; 25% 9\u201314%; 10% 16\u201325%",
+    "fuel_series": "weekly USD/barrel around IATA full-year forecast; no observed daily data"
+  },
+  "carriers": {
+    "MASkargo": {
+      "classification": "PUBLIC_NETWORK_NAME_SYNTHETIC_OPTIONS",
+      "source_ids": [
+        "teleport_1h_2026"
+      ],
+      "fleet_type": null,
+      "note": "All quotes and assignments are synthetic"
+    },
+    "Emirates SkyCargo": {
+      "classification": "SYNTHETIC_DEMO_CARRIER",
+      "source_ids": [],
+      "fleet_type": null,
+      "note": "Emirates retained for tested comparisons; no Teleport relationship claimed"
+    },
+    "Turkish Cargo": {
+      "classification": "PUBLIC_NETWORK_NAME_SYNTHETIC_OPTIONS",
+      "source_ids": [
+        "teleport_1h_2026"
+      ],
+      "fleet_type": null,
+      "note": "All quotes and assignments are synthetic"
+    },
+    "Myanmar Airways International": {
+      "classification": "PUBLIC_NETWORK_NAME_SYNTHETIC_OPTIONS",
+      "source_ids": [
+        "teleport_1h_2026"
+      ],
+      "fleet_type": null,
+      "note": "All quotes and assignments are synthetic"
+    },
+    "Synthetic Partner 01": {
+      "classification": "SYNTHETIC_DEMO_CARRIER",
+      "source_ids": [],
+      "fleet_type": null,
+      "note": "All quotes and assignments are synthetic"
+    },
+    "Synthetic Partner 02": {
+      "classification": "SYNTHETIC_DEMO_CARRIER",
+      "source_ids": [],
+      "fleet_type": null,
+      "note": "All quotes and assignments are synthetic"
+    },
+    "Own Freighter 1": {
+      "classification": "SYNTHETIC_DEMO_CARRIER",
+      "source_ids": [
+        "teleport_network_2026"
+      ],
+      "fleet_type": "A321F",
+      "note": "Named representative synthetic aircraft"
+    },
+    "Own Freighter 2": {
+      "classification": "SYNTHETIC_DEMO_CARRIER",
+      "source_ids": [
+        "teleport_network_2026"
+      ],
+      "fleet_type": "A321F",
+      "note": "Named representative synthetic aircraft"
+    },
+    "Own Freighter 3": {
+      "classification": "SYNTHETIC_DEMO_CARRIER",
+      "source_ids": [
+        "teleport_network_2026"
+      ],
+      "fleet_type": "A321F",
+      "note": "Named representative synthetic aircraft"
+    }
+  },
+  "source_snapshot_sha256": {
+    "airports_reference.csv": "5579766d085bbbb06e9d3406a3a37e01cc0d531ac435c25deba442ec26e7188e",
+    "iata_fuel_2026.json": "49a87a52e15f0e137247b0a9bee86d04867bd49cc6681531925bf22b94ca32f7",
+    "teleport_1h_2026.json": "0ff11baf9c0aef25c5b15b56cc415720d376d79ff19013571c9dd51fe5586ddc",
+    "teleport_fsc_reference.json": "3115fb6cec4ba8d349f63e7944daeab22ddf32eebfe31da3ceba48cd011d32de",
+    "teleport_network.json": "78756a88b4d0a184f096dc1546014b87f91db45658afe12b970eba007ed54b72",
+    "teleport_route_references.json": "2b5a5fa395ab040fd593c6ccd9d3aa8072e426c5d5405932db7405ae9cf1e542"
+  },
+  "dataset_sha256": {
+    "shipments.csv": "2a128e91e6f4596032790ab4fd7068da85bfa1d239a5567432f93ef871f4dda2",
+    "carrier_options.csv": "0564123be53f0598d80abfbf1d90f893ae9a944451818a26c290e881cae3e13b",
+    "fuel_index.csv": "a6f526c4133e90ef06955bf7b7beb020b37f7936d36997a130887f53bfbd441f",
+    "provenance/cost_inputs.csv": "5e5076bddd2fde3a4773b18d33839ca6cbe6a09aab3bfdfc7a71ca727969ce66"
+  }
+}

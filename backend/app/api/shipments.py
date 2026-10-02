@@ -39,4 +39,8 @@ def detail(shipment_id: str, request: Request):
     result = request.app.state.analytics.get_shipment_analysis(shipment_id)
     if result is None:
         raise HTTPException(404, "Shipment not found in usable dataset")
+    from app.config import DATA_MODE, DATA_DIR, BASE_DIR
+    if DATA_MODE == "demo" and DATA_DIR == BASE_DIR / "data":
+        from app.services.provenance import shipment_provenance
+        result["provenance"] = shipment_provenance(result["shipment"])
     return result

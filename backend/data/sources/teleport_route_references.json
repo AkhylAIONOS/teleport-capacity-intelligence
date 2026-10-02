@@ -1,0 +1,27 @@
+{
+  "source_id": "teleport_routes_2022",
+  "title": "Teleport historical cargo destinations (2022)",
+  "publisher": "Teleport",
+  "url": "https://www.teleport.it/newsroom/teleport-launches-12-cargo-destinations",
+  "source_type": "OFFICIAL_TELEPORT",
+  "retrieved_at": "2026-10-02",
+  "facts_used": {
+    "destinations": [
+      "KUL",
+      "SYD",
+      "HKG",
+      "ICN",
+      "HND",
+      "TPE",
+      "BLR",
+      "BOM",
+      "BKK",
+      "MNL",
+      "CGK",
+      "BKI"
+    ],
+    "hub": "KUL"
+  },
+  "notes": "Historical destination examples from February 2022. Classification refers to documented destination geography from KUL hub, not current direct schedules or real shipment records.",
+  "snapshot": "teleport_route_references.json"
+}

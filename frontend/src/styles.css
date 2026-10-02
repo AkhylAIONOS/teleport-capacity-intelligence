@@ -2293,3 +2293,12 @@ main {
   padding: 4px 7px;
   font-size: 10px;
 }
+
+.sources-action { font-size: 11px; color: var(--teal, #007f79); background: transparent; border: 1px solid #d8e4e2; border-radius: 5px; padding: 6px 9px; cursor: pointer; }
+.provenance-info { display: inline-flex; vertical-align: middle; padding: 2px; width: 20px; height: 20px; }
+.provenance-body section { margin-top: 22px; }
+.provenance-body article { padding: 10px 0; border-bottom: 1px solid #e2e8e7; }
+.provenance-body p { line-height: 1.6; overflow-wrap: anywhere; }
+.provenance-body dl div { display: flex; gap: 12px; justify-content: space-between; margin: 5px 0; }
+.provenance-body dd { text-align: right; margin: 0; }
+.heatmap-tooltip small { max-width: 330px; white-space: normal; }

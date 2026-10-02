@@ -28,6 +28,7 @@ import { RecommendationTable } from "./components/RecommendationTable";
 import { LaneHeatmap } from "./components/LaneHeatmap";
 import { AnalystBoundary } from "./components/AnalystBoundary";
 import { Backtest } from "./pages/Backtest";
+import { SourcesDrawer, KPIInfo } from "./components/Provenance";
 const nav = [
   ["Overview", LayoutDashboard],
   ["Shipments", Package],
@@ -37,6 +38,8 @@ const nav = [
   ["Data Quality", ShieldCheck],
 ] as const;
 export default function App() {
+  const [provenance, setProvenance] = useState<string | null>(null);
+  const closeProvenance = useCallback(() => setProvenance(null), []);
   const [view, setView] = useState("Overview");
   const [filters, setFilters] = useState<Filters>({});
   const [meta, setMeta] = useState<Metadata | null>(null);
@@ -226,6 +229,9 @@ export default function App() {
           </div>
         </div>
       </aside>
+      {provenance !== null && (
+        <SourcesDrawer field={provenance} onClose={closeProvenance} />
+      )}
       <main>
         <header className="topbar">
           <div className="breadcrumb">
@@ -240,6 +246,12 @@ export default function App() {
             <b>{view}</b>
           </div>
           <div className="top-actions">
+            <button
+              className="sources-action"
+              onClick={() => setProvenance("")}
+            >
+              Data Sources &amp; Assumptions
+            </button>
             <span className="demo-badge">
               {meta?.data_scope.data_mode === "demo" || !meta
                 ? "DEMO DATA"
@@ -375,7 +387,11 @@ export default function App() {
                         <div className="card kpi featured">
                           <strong>{money(s.potential_saving)}</strong>
                           <div className="kpi-label">
-                            POTENTIAL SAVINGS IDENTIFIED
+                            POTENTIAL SAVINGS IDENTIFIED{" "}
+                            <KPIInfo
+                              field="potential_saving"
+                              onOpen={setProvenance}
+                            />
                           </div>
                           <small>
                             {number(s.flagged_shipments)} shipments with
@@ -384,18 +400,34 @@ export default function App() {
                         </div>
                         <div className="card kpi">
                           <strong>{number(s.shipment_count)}</strong>
-                          <div className="kpi-label">SHIPMENTS SCORED</div>
-                          <small>Validated historical shipments</small>
+                          <div className="kpi-label">
+                            SHIPMENTS SCORED{" "}
+                            <KPIInfo
+                              field="shipment_count"
+                              onOpen={setProvenance}
+                            />
+                          </div>
+                          <small>Validated synthetic shipments</small>
                         </div>
                         <div className="card kpi">
                           <strong>{percent(s.already_optimal_percent)}</strong>
-                          <div className="kpi-label">ALREADY OPTIMAL</div>
+                          <div className="kpi-label">
+                            ALREADY OPTIMAL{" "}
+                            <KPIInfo
+                              field="already_optimal_percent"
+                              onOpen={setProvenance}
+                            />
+                          </div>
                           <small>No positive savings gap</small>
                         </div>
                         <div className="card kpi">
                           <strong>{money(s.average_saving_per_flagged)}</strong>
                           <div className="kpi-label">
-                            AVG. SAVING PER FLAGGED SHIPMENT
+                            AVG. SAVING PER FLAGGED SHIPMENT{" "}
+                            <KPIInfo
+                              field="average_saving_per_flagged"
+                              onOpen={setProvenance}
+                            />
                           </div>
                           <small>Positive savings only</small>
                         </div>
@@ -438,7 +470,7 @@ export default function App() {
                         [
                           "Shipments analysed",
                           number(s.shipment_count),
-                          "Validated historical shipments",
+                          "Validated synthetic shipments",
                         ],
                         [
                           "Avg. flagged saving",

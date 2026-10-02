@@ -50,6 +50,10 @@ export type Shipments = {
   page_size: number;
 };
 export type Detail = {
+  provenance?: {
+    lane?: { classification: string; note: string };
+    cost_inputs: Record<string, string | number>[];
+  };
   shipment: Row;
   recommended_option: Row | null;
   candidates: Row[];

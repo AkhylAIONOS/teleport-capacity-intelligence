@@ -172,6 +172,13 @@ class AIService:
         )
 
     def chat(self, request):
+        from app.services.provenance import provenance_answer
+        grounded = provenance_answer(request.message)
+        if grounded:
+            answer, provenance = grounded
+            return AIResponse(answer=answer, intent="DATA_PROVENANCE", provider="deterministic",
+                metrics={"provenance": provenance}, context=dict(request.context),
+                data_scope=self.analytics.scope(self.analytics.filtered(request.filters), request.filters))
         parsed = self.provider.parse(request.message, request.filters, request.context)
         return self.execute(
             parsed["intent"], parsed["filters"], parsed["entities"], request.context

@@ -1,0 +1,134 @@
+[
+  {
+    "source_id": "teleport_1h_2026",
+    "title": "Teleport official 1H 2026 results",
+    "publisher": "Teleport",
+    "url": "https://www.teleport.it/newsroom/teleport-1h-financial-results",
+    "source_type": "OFFICIAL_TELEPORT",
+    "retrieved_at": "2026-10-02",
+    "facts_used": {
+      "revenue_usd": 156400000,
+      "ebitda_usd": 12100000,
+      "volume_tonnes": 182660,
+      "parcels": 118200000,
+      "cities_min": 290,
+      "countries": 80,
+      "third_party_volume_growth_percent": 7,
+      "freighter_utilisation_growth_percent": 89,
+      "partner_names": [
+        "MASkargo",
+        "Turkish Cargo",
+        "Myanmar Airways International"
+      ]
+    },
+    "notes": "Published September 2026; company-level disclosure, not shipment-level evidence. Utilisation growth is a YoY change, not an occupancy percentage.",
+    "snapshot": "teleport_1h_2026.json"
+  },
+  {
+    "source_id": "teleport_network_2026",
+    "title": "Teleport Network",
+    "publisher": "Teleport",
+    "url": "https://www.teleport.it/the-teleport-network",
+    "source_type": "OFFICIAL_TELEPORT",
+    "retrieved_at": "2026-10-02",
+    "facts_used": {
+      "owned_freighters": 3,
+      "fleet_type": "A321F",
+      "freighter_routes": 17,
+      "air_partners_min": 55,
+      "partner_routes_min": 640,
+      "airasia_fleet_min": 200,
+      "airasia_routes_min": 730
+    },
+    "notes": "Network snapshot retrieved October 2026; used for retrospective demo calibration, not proof of Jan-Jun schedules or fleet availability.",
+    "snapshot": "teleport_network.json"
+  },
+  {
+    "source_id": "teleport_routes_2022",
+    "title": "Teleport historical cargo destinations (2022)",
+    "publisher": "Teleport",
+    "url": "https://www.teleport.it/newsroom/teleport-launches-12-cargo-destinations",
+    "source_type": "OFFICIAL_TELEPORT",
+    "retrieved_at": "2026-10-02",
+    "facts_used": {
+      "destinations": [
+        "KUL",
+        "SYD",
+        "HKG",
+        "ICN",
+        "HND",
+        "TPE",
+        "BLR",
+        "BOM",
+        "BKK",
+        "MNL",
+        "CGK",
+        "BKI"
+      ],
+      "hub": "KUL"
+    },
+    "notes": "Historical destination examples from February 2022. Classification refers to documented destination geography from KUL hub, not current direct schedules or real shipment records.",
+    "snapshot": "teleport_route_references.json"
+  },
+  {
+    "source_id": "teleport_fsc_reference",
+    "title": "Teleport weekly fuel surcharge mechanism",
+    "publisher": "Teleport",
+    "url": "https://help.teleport.it/article/15-september-2026---21-september-2026-fuel-surcharge-fsc-rates/7226",
+    "source_type": "OFFICIAL_TELEPORT",
+    "retrieved_at": "2026-10-02",
+    "facts_used": {
+      "benchmark_usd_per_barrel": 90,
+      "adjustment": "weekly",
+      "unit": "USD/kg",
+      "assessment_references": [
+        "S&P Global Platts",
+        "IATA"
+      ],
+      "regional_approach": true
+    },
+    "notes": "URL slug says 15\u201321 September but published article title says 8\u201314 September. Mechanism only; no September rates copied into Jan-Jun. The USD90 reset and weekly assessments also appear in the March 2026 CBO notice.",
+    "snapshot": "teleport_fsc_reference.json",
+    "supporting_urls": [
+      "https://help.teleport.it/article/scheduled-system-maintenance-smartkargo-4-february-2026-0000-0130-utc8/6996",
+      "https://help.teleport.it/category/announcements/fuel-surcharge-fsc"
+    ]
+  },
+  {
+    "source_id": "iata_fuel_2026",
+    "title": "IATA 2026 fuel outlook",
+    "publisher": "IATA",
+    "url": "https://www.iata.org/en/pressroom/2026-releases/06-07-middle-east-disruptions-high-fuel-prices-halve-airline-industry-profitability/",
+    "source_type": "OFFICIAL_INDUSTRY",
+    "retrieved_at": "2026-10-02",
+    "facts_used": {
+      "jet_fuel_average_usd_per_barrel": 152,
+      "fuel_operating_expenses_percent": 31.4,
+      "prior_year_usd_per_barrel": 90
+    },
+    "notes": "June 2026 full-year forecast, not daily observations or a measured Jan-Jun average.",
+    "snapshot": "iata_fuel_2026.json"
+  },
+  {
+    "source_id": "ourairports",
+    "title": "OurAirports airport metadata",
+    "publisher": "OurAirports",
+    "url": "https://ourairports.com/data/",
+    "download_url": "https://davidmegginson.github.io/ourairports-data/airports.csv",
+    "source_type": "OPEN_DATA",
+    "retrieved_at": "2026-10-02",
+    "facts_used": {
+      "fields": [
+        "iata_code",
+        "icao_code",
+        "name",
+        "municipality",
+        "iso_country",
+        "latitude_deg",
+        "longitude_deg"
+      ]
+    },
+    "notes": "Public domain; committed subset of airports.csv, no runtime fetching.",
+    "snapshot": "airports_reference.csv"
+  }
+]

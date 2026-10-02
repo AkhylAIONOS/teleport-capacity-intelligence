@@ -1,0 +1,19 @@
+{
+  "source_id": "teleport_network_2026",
+  "title": "Teleport Network",
+  "publisher": "Teleport",
+  "url": "https://www.teleport.it/the-teleport-network",
+  "source_type": "OFFICIAL_TELEPORT",
+  "retrieved_at": "2026-10-02",
+  "facts_used": {
+    "owned_freighters": 3,
+    "fleet_type": "A321F",
+    "freighter_routes": 17,
+    "air_partners_min": 55,
+    "partner_routes_min": 640,
+    "airasia_fleet_min": 200,
+    "airasia_routes_min": 730
+  },
+  "notes": "Network snapshot retrieved October 2026; used for retrospective demo calibration, not proof of Jan-Jun schedules or fleet availability.",
+  "snapshot": "teleport_network.json"
+}

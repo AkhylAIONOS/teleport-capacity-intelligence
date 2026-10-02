@@ -22,7 +22,7 @@ export function Panel({
       if (e.key === "Tab") {
         const nodes = Array.from(
           ref.current?.querySelectorAll<HTMLElement>(
-            'button:not(:disabled),input,select,textarea,[tabindex="0"]',
+            'a[href],button:not(:disabled),input,select,textarea,summary,[tabindex="0"]',
           ) || [],
         );
         if (!nodes.length) return;
@@ -174,6 +174,54 @@ export function ShipmentDrawer({
                   : `${d?.feasible_count} feasible / ${d?.candidate_count} candidates`}
               </small>
             </section>
+            <section className="explanation">
+              <h3>Data provenance</h3>
+              <p>
+                Shipment record and actual carrier assignment: SYNTHETIC.
+                Airport metadata: PUBLIC OPEN DATA (OurAirports). Candidate
+                options: SYNTHETIC CALIBRATED. Fuel component: DERIVED FROM
+                PUBLIC-BENCHMARK-CALIBRATED SYNTHETIC FUEL SERIES.
+                Recommendation: DETERMINISTIC OPTIMIZER OUTPUT. These are not
+                actual Teleport historical records.
+              </p>
+            </section>
+            {detail.provenance && (
+              <section className="explanation">
+                {detail.provenance.lane && (
+                  <p>
+                    {detail.provenance.lane.classification}:{" "}
+                    {detail.provenance.lane.note}
+                  </p>
+                )}
+                {!!detail.provenance.cost_inputs.length && (
+                  <details>
+                    <summary>Exact synthetic cost calculation inputs</summary>
+                    <p>
+                      Base = market base × candidate multiplier. Other = market
+                      other × candidate multiplier. Fuel = weight × max(weekly
+                      index − benchmark, 0) × fuel coefficient × lane factor ×
+                      candidate multiplier. Round each component to cents, then
+                      sum for landed cost.
+                    </p>
+                    {detail.provenance.cost_inputs.map((row) => (
+                      <details key={String(row.option_id)}>
+                        <summary>{row.option_id}</summary>
+                        <dl>
+                          {Object.entries(row)
+                            .filter(([key]) => key !== "shipment_id")
+                            .map(([key, value]) => (
+                              <div key={key}>
+                                <dt>{key.replaceAll("_", " ")}</dt>
+                                <dd>{String(value)}</dd>
+                              </div>
+                            ))}
+                        </dl>
+                      </details>
+                    ))}
+                  </details>
+                )}
+              </section>
+            )}
             <h3>Historical candidates</h3>
             <div className="table-scroll">
               <table>

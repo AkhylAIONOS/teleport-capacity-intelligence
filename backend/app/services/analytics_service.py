@@ -108,7 +108,9 @@ class AnalyticsService:
         )
         maximum = float(grouped.potential_saving.max())
         grouped["intensity"] = grouped.potential_saving / maximum if maximum else 0.0
-        return records(grouped.sort_values(["lane", "month"]))
+        from app.services.provenance import load_provenance
+        provenance = load_provenance()["lane_provenance"]
+        return [{**row, "provenance": provenance.get(row["lane"], {"classification": "UNCLASSIFIED_IMPORTED_LANE", "note": "No public route evidence attached."})} for row in records(grouped.sort_values(["lane", "month"]))]
 
     def get_lane_analysis(self, lane, filters=None):
         f = (filters or Filters()).model_copy(update={"lane": lane})

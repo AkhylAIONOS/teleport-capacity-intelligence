@@ -1,0 +1,25 @@
+{
+  "source_id": "teleport_1h_2026",
+  "title": "Teleport official 1H 2026 results",
+  "publisher": "Teleport",
+  "url": "https://www.teleport.it/newsroom/teleport-1h-financial-results",
+  "source_type": "OFFICIAL_TELEPORT",
+  "retrieved_at": "2026-10-02",
+  "facts_used": {
+    "revenue_usd": 156400000,
+    "ebitda_usd": 12100000,
+    "volume_tonnes": 182660,
+    "parcels": 118200000,
+    "cities_min": 290,
+    "countries": 80,
+    "third_party_volume_growth_percent": 7,
+    "freighter_utilisation_growth_percent": 89,
+    "partner_names": [
+      "MASkargo",
+      "Turkish Cargo",
+      "Myanmar Airways International"
+    ]
+  },
+  "notes": "Published September 2026; company-level disclosure, not shipment-level evidence. Utilisation growth is a YoY change, not an occupancy percentage.",
+  "snapshot": "teleport_1h_2026.json"
+}

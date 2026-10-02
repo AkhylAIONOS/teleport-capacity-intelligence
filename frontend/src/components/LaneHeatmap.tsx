@@ -12,6 +12,11 @@ export function LaneHeatmap({
   const lanes = [...new Set(rows.map((r) => String(r.lane)))].sort();
   const months = [...new Set(rows.map((r) => String(r.month)))].sort();
   const cells = new Map(rows.map((r) => [`${r.lane}:${r.month}`, r]));
+  const laneNote = (row: Row) => {
+    const p = row.provenance as
+      { classification?: string; note?: string } | undefined;
+    return p ? `${p.classification}: ${p.note}` : "Lane provenance unavailable";
+  };
   const multiYear = new Set(months.map((m) => m.slice(0, 4))).size > 1;
   return (
     <section className="card heatmap-card">
@@ -60,7 +65,7 @@ export function LaneHeatmap({
                           onClick={() =>
                             onApply({ lane, ...monthRange(month) })
                           }
-                          title={`${lane} · ${monthLabel(month, true)}\nActual spend: ${money(row.actual_spend)}\nOptimized spend: ${money(row.optimized_spend)}\nPotential saving: ${money(row.potential_saving)}\nSaving: ${percent(row.saving_percent)}`}
+                          title={`${laneNote(row)}\n${lane} · ${monthLabel(month, true)}\nActual spend: ${money(row.actual_spend)}\nOptimized spend: ${money(row.optimized_spend)}\nPotential saving: ${money(row.potential_saving)}\nSaving: ${percent(row.saving_percent)}`}
                         >
                           <span className="sr-only">
                             {money(row.potential_saving)}
@@ -105,6 +110,7 @@ export function LaneHeatmap({
           <span>
             Potential saving <strong>{money(hover.potential_saving)}</strong>
           </span>
+          <small>{laneNote(hover)}</small>
           <span>
             Saving rate <strong>{percent(hover.saving_percent)}</strong>
           </span>

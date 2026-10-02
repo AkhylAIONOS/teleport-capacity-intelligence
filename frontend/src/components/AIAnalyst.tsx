@@ -1,3 +1,4 @@
+import { ProvenanceAnswer } from "./Provenance";
 import { useState, useRef, useEffect } from "react";
 import {
   Sparkles,
@@ -231,7 +232,13 @@ export function AIAnalyst({
                   ? "DASHBOARD"
                   : "CAPACITY ANALYST"}
             </small>
-            <p>{m.text}</p>
+            <p>
+              {m.result?.intent === "DATA_PROVENANCE" ? (
+                <ProvenanceAnswer text={m.text} />
+              ) : (
+                m.text
+              )}
+            </p>
             {m.result && (
               <>
                 <div className="metric-mini">

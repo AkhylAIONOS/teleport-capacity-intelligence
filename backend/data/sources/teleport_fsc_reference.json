@@ -1,0 +1,24 @@
+{
+  "source_id": "teleport_fsc_reference",
+  "title": "Teleport weekly fuel surcharge mechanism",
+  "publisher": "Teleport",
+  "url": "https://help.teleport.it/article/15-september-2026---21-september-2026-fuel-surcharge-fsc-rates/7226",
+  "source_type": "OFFICIAL_TELEPORT",
+  "retrieved_at": "2026-10-02",
+  "facts_used": {
+    "benchmark_usd_per_barrel": 90,
+    "adjustment": "weekly",
+    "unit": "USD/kg",
+    "assessment_references": [
+      "S&P Global Platts",
+      "IATA"
+    ],
+    "regional_approach": true
+  },
+  "notes": "URL slug says 15\u201321 September but published article title says 8\u201314 September. Mechanism only; no September rates copied into Jan-Jun. The USD90 reset and weekly assessments also appear in the March 2026 CBO notice.",
+  "snapshot": "teleport_fsc_reference.json",
+  "supporting_urls": [
+    "https://help.teleport.it/article/scheduled-system-maintenance-smartkargo-4-february-2026-0000-0130-utc8/6996",
+    "https://help.teleport.it/category/announcements/fuel-surcharge-fsc"
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "KUL-DEL": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  },
+  "KUL-BOM": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-SIN": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  },
+  "KUL-BKK": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-MNL": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-CGK": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-MAA": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  },
+  "KUL-BLR": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-SYD": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-HKG": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-ICN": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-HND": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-TPE": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "KUL-BKI": {
+    "classification": "PUBLICLY_DOCUMENTED_ROUTE",
+    "source_ids": [
+      "teleport_routes_2022"
+    ],
+    "note": "Historical publicly documented destination from KUL hub; not a claim of current direct service or real shipments."
+  },
+  "BOM-SIN": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  },
+  "DEL-BKK": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  },
+  "SIN-CGK": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  },
+  "BKK-MNL": {
+    "classification": "SYNTHETIC_DEMO_LANE",
+    "source_ids": [
+      "ourairports"
+    ],
+    "note": "Synthetic demonstration lane using public airport/network geography; not claimed as an actual historical Teleport direct route."
+  }
+}

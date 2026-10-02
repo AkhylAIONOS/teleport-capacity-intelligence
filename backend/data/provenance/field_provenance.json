@@ -1,0 +1,361 @@
+{
+  "shipment_id": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "shipment_date": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "weight_kg": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "volume_cbm": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "actual_carrier": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "actual_rate_type": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "actual_departure_date": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "carrier": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "mode": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "departure_date": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "rate_type": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "capacity_available_kg": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "required_capacity_kg": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "available": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "sla_feasible": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "option_id": {
+    "classification": "SYNTHETIC",
+    "description": "Simulated shipment-level commercial or operational record; not actual Teleport history.",
+    "source_ids": []
+  },
+  "origin": {
+    "classification": "SYNTHETIC",
+    "description": "Synthetic record using public airport metadata.",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "destination": {
+    "classification": "SYNTHETIC",
+    "description": "Synthetic record using public airport metadata.",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "base_cost": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "Simulated USD cost, not a public carrier quote or contract.",
+    "source_ids": []
+  },
+  "other_cost": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "Simulated USD cost, not a public carrier quote or contract.",
+    "source_ids": []
+  },
+  "actual_base_cost": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "Simulated USD cost, not a public carrier quote or contract.",
+    "source_ids": []
+  },
+  "actual_other_cost": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "Simulated USD cost, not a public carrier quote or contract.",
+    "source_ids": []
+  },
+  "fuel_index": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "SYNTHETIC SERIES CALIBRATED TO PUBLIC 2026 BENCHMARK; fuel_index is USD/barrel; fuel_price_usd is USD/litre (index / 158.987).",
+    "source_ids": [
+      "iata_fuel_2026"
+    ]
+  },
+  "fuel_price_usd": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "SYNTHETIC SERIES CALIBRATED TO PUBLIC 2026 BENCHMARK; fuel_index is USD/barrel; fuel_price_usd is USD/litre (index / 158.987).",
+    "source_ids": [
+      "iata_fuel_2026"
+    ]
+  },
+  "fuel_surcharge": {
+    "classification": "DERIVED",
+    "description": "PUBLIC_CALIBRATION + SYNTHETIC_GENERATED_VALUE. Synthetic coefficient and regional factors; not official historical FSC rates.",
+    "formula": "round(weight_kg * max(weekly_fuel_index - 90, 0) * 0.006 * lane_factor * candidate_multiplier, 2)",
+    "source_ids": [
+      "iata_fuel_2026",
+      "teleport_fsc_reference"
+    ]
+  },
+  "actual_fuel_surcharge": {
+    "classification": "DERIVED",
+    "description": "PUBLIC_CALIBRATION + SYNTHETIC_GENERATED_VALUE. Synthetic coefficient and regional factors; not official historical FSC rates.",
+    "formula": "round(weight_kg * max(weekly_fuel_index - 90, 0) * 0.006 * lane_factor * candidate_multiplier, 2)",
+    "source_ids": [
+      "iata_fuel_2026",
+      "teleport_fsc_reference"
+    ]
+  },
+  "total_landed_cost": {
+    "classification": "DERIVED",
+    "formula": "base_cost + fuel_surcharge + other_cost",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "actual_paid": {
+    "classification": "DERIVED",
+    "formula": "actual_base_cost + actual_fuel_surcharge + actual_other_cost",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "recommended_carrier": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "formula": "carrier of lowest feasible candidate; tie-break departure_date, carrier, option_id; historical fallback if none",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "optimized_cost": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "formula": "lowest feasible total_landed_cost; actual_paid fallback if no feasible option",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "potential_saving": {
+    "classification": "DERIVED",
+    "formula": "SUM(max(actual_paid - optimized_cost, 0))",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "saving_percent": {
+    "classification": "DERIVED",
+    "formula": "SUM(potential_saving) / SUM(actual_paid) * 100",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "shipment_count": {
+    "classification": "DERIVED",
+    "formula": "COUNT(synthetic shipment records in active scope)",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "already_optimal_percent": {
+    "classification": "DERIVED",
+    "formula": "COUNT(potential_saving <= 0) / shipment_count * 100 (includes no-feasible fallback)",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "average_saving_per_flagged": {
+    "classification": "DERIVED",
+    "formula": "SUM(potential_saving) / COUNT(potential_saving > 0); zero when none",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "lane_aggregation": {
+    "classification": "DERIVED",
+    "formula": "GROUP BY origin-destination; SUM(spend, optimized_cost, potential_saving)",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "carrier_aggregation": {
+    "classification": "DERIVED",
+    "formula": "GROUP BY historical actual_carrier; SUM(spend, potential_saving)",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "monthly_trend": {
+    "classification": "DERIVED",
+    "formula": "GROUP BY shipment_date calendar month; SUM(spend, optimized_cost, potential_saving)",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "rate_mix": {
+    "classification": "DERIVED",
+    "formula": "COUNT and SUM(weight_kg) grouped by actual/recommended rate_type",
+    "description": "Calculated from synthetic records in active scope. Not actual Teleport historical savings.",
+    "source_ids": []
+  },
+  "airport_name": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "iata_code": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "icao_code": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "municipality": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "country": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "latitude": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "longitude": {
+    "classification": "PUBLIC_OPEN_DATA",
+    "source_ids": [
+      "ourairports"
+    ]
+  },
+  "owned_freighter_count": {
+    "classification": "PUBLIC_TELEPORT",
+    "source_ids": [
+      "teleport_network_2026"
+    ]
+  },
+  "synthetic_candidate_multiplier": {
+    "classification": "SYNTHETIC",
+    "description": "Exact simulated per-option cost construction input in cost_inputs.csv.",
+    "source_ids": []
+  },
+  "synthetic_lane_factor": {
+    "classification": "SYNTHETIC",
+    "description": "Exact simulated per-option cost construction input in cost_inputs.csv.",
+    "source_ids": []
+  },
+  "synthetic_fuel_coefficient": {
+    "classification": "SYNTHETIC",
+    "description": "Exact simulated per-option cost construction input in cost_inputs.csv.",
+    "source_ids": []
+  },
+  "synthetic_market_base": {
+    "classification": "SYNTHETIC",
+    "description": "Exact simulated per-option cost construction input in cost_inputs.csv.",
+    "source_ids": []
+  },
+  "synthetic_market_other": {
+    "classification": "SYNTHETIC",
+    "description": "Exact simulated per-option cost construction input in cost_inputs.csv.",
+    "source_ids": []
+  },
+  "recommended_rate_type": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "recommended_departure_date": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "recommended_option_id": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "feasible_count": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "candidate_count": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "status": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "changed_carrier": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "changed_rate_type": {
+    "classification": "DERIVED_BY_OPTIMIZER",
+    "description": "Deterministic evaluation of synthetic candidate records.",
+    "formula": "Existing optimizer evaluation and feasible candidate selection",
+    "source_ids": []
+  },
+  "weekly_fuel_index": {
+    "classification": "SYNTHETIC_CALIBRATED",
+    "description": "SYNTHETIC SERIES CALIBRATED TO PUBLIC 2026 BENCHMARK; fuel_index is USD/barrel; fuel_price_usd is USD/litre (index / 158.987).",
+    "source_ids": [
+      "iata_fuel_2026"
+    ]
+  },
+  "benchmark_usd_per_barrel": {
+    "classification": "PUBLIC_TELEPORT",
+    "description": "USD90 reset/benchmark from official Teleport FSC mechanism; not a historical shipment FSC amount.",
+    "source_ids": [
+      "teleport_fsc_reference"
+    ]
+  }
+}

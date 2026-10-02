@@ -1,8 +1,8 @@
 # Teleport Capacity Intelligence
 
-A local, working logistics capacity and cost backtesting MVP. **The bundled data is entirely simulated. It is not real Teleport history, carrier pricing, or commercial performance.** All monetary amounts are USD.
+A local, working logistics capacity and cost backtesting MVP. **The bundled shipment-level data is public-source-calibrated synthetic data. It is not real Teleport history, carrier pricing, or commercial performance.** All monetary amounts are USD.
 
-Explore 2,000 simulated historical shipments, 12,123 recorded candidate options, 12 lanes, eight carriers, and daily fuel indices across January–June 2026. The fixed-seed generator makes the demo reproducible. Carrier names are illustrative; the generated values are not quotes from those carriers.
+Explore 2,000 simulated historical shipments, 13,147 synthetic candidate options, 18 lanes, nine representative carriers, and daily fuel indices across January–June 2026. The fixed-seed generator makes the demo reproducible. Carrier names are illustrative; the generated values are not quotes from those carriers.
 
 ## Quick start (macOS/Linux)
 
@@ -210,6 +210,7 @@ No frontend or optimization rewrite is needed for source column renaming. Mappin
 | GET    | `/api/dashboard/carriers`      | Actual carrier statistics                                |
 | GET    | `/api/dashboard/rate-mix`      | Actual/recommended shipment and weight mix               |
 | GET    | `/api/dashboard/metadata`      | Filter values, available dates, full-data audit          |
+| GET    | `/api/dashboard/provenance`    | Local source registry, field/lane provenance and manifest |
 | GET    | `/api/dashboard/quality`       | Full loaded data quality audit                           |
 | GET    | `/api/shipments`               | Sorted paginated filtered shipments                      |
 | GET    | `/api/shipments/{shipment_id}` | Decision and candidate audit; 404 if missing             |
@@ -265,6 +266,80 @@ For a live backend-through-Vite-proxy smoke check, keep both servers running and
 
 The included `Teleport_Capacity_Backtest_Brief.pdf` page 4 is the primary Overview layout; page 5 is styling guidance only. All four decision-support elements remain together rather than moving the table below analytics. Dates remain ISO internally and display as Jan/Feb/Mar or readable dates. Recommendation Day displays the departure weekday; the full date is available on hover and in the audit drawer.
 
-The fixed-seed generator now uses a shared market-cost baseline per shipment and a distribution of zero/small/moderate/larger option discounts. It naturally produces an aggregate opportunity of **6.74%** (2,000 demo shipments), rather than unrelated per-carrier prices producing 32%. The 5–10% regression expectation applies to bundled generated demo data only; no metric, optimizer, real-data adapter, or UI applies a percentage cap.
+The fixed-seed generator now uses a shared market-cost baseline per shipment and a distribution of zero/small/moderate/larger option discounts. It naturally produces an aggregate opportunity of **6.70%** (2,000 demo shipments), rather than unrelated per-carrier prices producing 32%. The 5–10% regression expectation applies to bundled generated demo data only; no metric, optimizer, real-data adapter, or UI applies a percentage cap.
 
 The old AI rendering assumed `metrics`, `table`, `filters` and `data_scope` always existed, using unchecked `Object.entries`, `Object.keys` and property access. An incomplete response could throw a render exception with no error boundary to protect the dashboard. The new dock normalizes transport data, displays an in-chat retry for empty/error responses, and catches unexpected panel render exceptions. Exact reproduction of the original browser click failure was unavailable because the browser runtime had no connected browser; component tests verify these concrete failure paths and the replacement flow.
+
+## DATA PROVENANCE
+
+The committed demo is **PUBLIC-SOURCE-CALIBRATED SYNTHETIC DATA**. It is not actual
+Teleport shipment history, and its savings are not Teleport financial results.
+
+- **PUBLIC:** Teleport company disclosures and network facts, historic destination
+  references, the weekly regional FSC mechanism, IATA's full-year 2026 fuel
+  forecast, and the public-domain OurAirports airport metadata subset.
+- **SYNTHETIC:** shipment IDs/dates/weights/volumes, assignments, individual
+  carrier quotes, contract/spot/owned prices, booking capacity, SLA, rejected
+  candidates and weekly fuel values. Publicly named partners do not establish
+  that any simulated shipment used those carriers.
+- **DERIVED:** landed cost, optimizer recommendation and optimized cost, savings,
+  savings %, lane/carrier aggregates, monthly trends and rate mix.
+
+The source registry, field formulas, lane classifications and demo manifest live
+in `backend/data/provenance/`; versioned public facts and airport metadata live in
+`backend/data/sources/`. The dashboard's **Data Sources & Assumptions** action and
+KPI information buttons expose these committed records. The heatmap explains lane
+classification; shipment audits explain input and output provenance. Twelve AI
+provenance questions use deterministic local answers before any optional LLM.
+
+KUL–DEL remains a synthetic demonstration lane, with no confirmed direct Teleport
+route claimed. KUL–BOM and other documented KUL destinations reference the 2022
+announcement, not a current schedule. All existing lanes remain; six public
+historic destinations (SYD, HKG, ICN, HND, TPE, BKI) were added. Partner Air A/B
+became Synthetic Partner 01/02, and Myanmar Airways International was added.
+Emirates SkyCargo remains for existing comparison flows, explicitly as a synthetic
+demo carrier with no sourced Teleport partnership asserted. Owned freighter names
+represent three synthetic aircraft with public A321F fleet-type calibration.
+
+The IATA $152/barrel figure is a full-year forecast published in June, not an
+observed Jan–Jun mean. Later public network and FSC snapshots provide retrospective
+calibration only. The supplied FSC URL resolves to an 8–14 September title despite
+its 15–21 September slug; no September rates enter Jan–Jun records. Weekly fuel
+values vary synthetically around $152/barrel; `fuel_price_usd` is a synthetic
+USD/litre conversion using 158.987 litres/barrel. Candidate surcharge = weight ×
+max(weekly index − $90, 0) × synthetic 0.006 coefficient × synthetic regional lane
+factor × candidate multiplier, rounded to cents. Base and other costs are also
+synthetic; their sum with surcharge gives landed cost. Rate type is not guaranteed
+to be cheapest. The unchanged optimizer applies all existing feasibility rules.
+
+Potential saving = SUM(max(actual_paid − optimized_cost, 0)); aggregate saving % =
+SUM(potential_saving) / SUM(actual_paid) × 100. Already Optimal includes zero-gap
+historical fallback when no candidate is feasible. Average Saving uses positive-gap
+shipments only. These formulas always apply to the active filter scope.
+
+Manual snapshot maintenance (never runs on Render startup):
+
+```sh
+cd backend
+.venv/bin/python scripts/refresh_public_sources.py          # offline validation
+.venv/bin/python scripts/refresh_public_sources.py --fetch  # conservative verification/refresh
+.venv/bin/python scripts/refresh_public_sources.py --import-dir /path/to/reviewed-snapshots
+.venv/bin/python scripts/generate_demo.py
+```
+
+A failed download, changed page layout, or unverified fact retains the previous
+snapshot and prints `RETAINED`; changed facts require reviewed JSON snapshots.
+No key, paid API or database is needed. Airport refresh keeps the existing subset.
+Review registry changes before committing. Regenerate and run tests after any
+calibration changes. Generation uses fixed seed **20261002**, 2,000 shipments,
+Jan–Jun 2026 and deterministic fixture TP-88213 on KUL–BOM. `--output-dir` allows
+isolated reproduction; `--generated-at` fixes manifest timestamps for comparisons.
+CSV content is reproducible; normal manifest generation records the current UTC
+execution timestamp. Company revenue/volume figures are context, never scaled into
+synthetic shipment financials or displayed demo savings.
+
+`backend/data/provenance/cost_inputs.csv` records exact simulated market bases,
+candidate multipliers, regional factors, coefficients and weekly fuel inputs for
+every option. The shipment drawer exposes these inputs in a collapsed audit
+section. The manifest includes SHA-256 digests of source snapshots and generated
+CSVs, making the precise calibration artifacts and calculation inputs reviewable.

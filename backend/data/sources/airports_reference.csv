@@ -1,0 +1,16 @@
+iata_code,icao_code,name,municipality,iso_country,latitude_deg,longitude_deg
+BKI,WBKK,Kota Kinabalu International Airport,Kota Kinabalu,MY,5.932743,116.049324
+BKK,VTBS,Suvarnabhumi Airport,Bangkok,TH,13.6811,100.747002
+BLR,VOBL,Kempegowda International Airport Bengaluru,Bengaluru,IN,13.1979,77.706299
+BOM,VABB,Chhatrapati Shivaji Maharaj International Airport,Mumbai,IN,19.088699,72.867897
+CGK,WIII,Soekarno-Hatta International Airport,Jakarta,ID,-6.12557,106.655998
+DEL,VIDP,Indira Gandhi International Airport,New Delhi,IN,28.55563,77.09519
+HKG,VHHH,Hong Kong International Airport,Hong Kong,HK,22.31184,113.914862
+HND,RJTT,Tokyo Haneda International Airport,Tokyo,JP,35.549678,139.786958
+ICN,RKSI,Incheon International Airport,Seoul,KR,37.469101,126.450996
+KUL,WMKK,Kuala Lumpur International Airport,Sepang,MY,2.74558,101.709999
+MAA,VOMM,Chennai International Airport,Chennai,IN,12.990005,80.169296
+MNL,RPLL,Ninoy Aquino International Airport,Manila (Pasay),PH,14.5086,121.019997
+SIN,WSSS,Singapore Changi Airport,Singapore,SG,1.35019,103.994003
+SYD,YSSY,Sydney Kingsford Smith International Airport,Sydney (Mascot),AU,-33.946098,151.177002
+TPE,RCTP,Taiwan Taoyuan International Airport,Taoyuan,TW,25.0777,121.233002

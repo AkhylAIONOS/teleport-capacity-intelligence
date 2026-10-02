@@ -1,0 +1,15 @@
+{
+  "source_id": "iata_fuel_2026",
+  "title": "IATA 2026 fuel outlook",
+  "publisher": "IATA",
+  "url": "https://www.iata.org/en/pressroom/2026-releases/06-07-middle-east-disruptions-high-fuel-prices-halve-airline-industry-profitability/",
+  "source_type": "OFFICIAL_INDUSTRY",
+  "retrieved_at": "2026-10-02",
+  "facts_used": {
+    "jet_fuel_average_usd_per_barrel": 152,
+    "fuel_operating_expenses_percent": 31.4,
+    "prior_year_usd_per_barrel": 90
+  },
+  "notes": "June 2026 full-year forecast, not daily observations or a measured Jan-Jun average.",
+  "snapshot": "iata_fuel_2026.json"
+}

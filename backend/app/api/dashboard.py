@@ -47,3 +47,9 @@ def quality(request: Request):
 @router.get("/lane-heatmap")
 def lane_heatmap(request: Request, filters: Filters = Depends(parse_filters)):
     return request.app.state.analytics.get_lane_heatmap(filters)
+
+
+@router.get("/provenance")
+def provenance():
+    from app.services.provenance import load_provenance
+    return load_provenance()
